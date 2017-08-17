@@ -19,6 +19,7 @@ var app = app || {};
 		events: {
 			'click .toggle': 'toggleCompleted',
 			'dblclick label': 'edit',
+			'click .priority-btn': 'priority',
 			'click .destroy': 'clear',
 			'click .edit-btn': 'edit',
 			'keypress .edit': 'updateOnEnter',
@@ -123,6 +124,11 @@ var app = app || {};
 				// Also reset the hidden input back to the original value.
 				this.$input.val(this.model.get('title'));
 			}
+		},
+
+		// Highlight the item in red
+		priority: function () {
+			this.$el.toggleClass('priority');
 		},
 
 		// Remove the item, destroy the model from *localStorage* and delete its view.
