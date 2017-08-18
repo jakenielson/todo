@@ -98,18 +98,28 @@ var app = app || {};
 		newAttributes: function () {
 			console.log(this.$input.val().slice(1).slice(-3));
 			return {
-				title:  (this.$input.val().slice(1).slice(-3) === "--p") ? this.$input.val().trim().slice(0, -3).trim() : this.$input.val().trim(),
+				title:  this.$input.val().trim(),
 				order: app.todos.nextOrder(),
-				priority: (this.$input.val().slice(1).slice(-3) === "--p"),
+				priority: false,
 				completed: false
 			};
+		},
+
+		shortcuts: function(m) {
+			// Check for priority shortcut --p
+			if (m.title.slice(1).slice(-3) === "--p"){
+				// Set priority
+				m.priority = true;
+				m.title = m.title.slice(0, -3).trim();
+			}
+			return m;
 		},
 
 		// If you hit return in the main input field, create new **Todo** model,
 		// persisting it to *localStorage*.
 		createOnEnter: function (e) {
 			if (e.which === ENTER_KEY && this.$input.val().trim()) {
-				app.todos.create(this.newAttributes());
+				app.todos.create(this.shortcuts(this.newAttributes()));
 				this.$input.val('');
 			}
 		},
