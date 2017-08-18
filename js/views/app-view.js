@@ -96,9 +96,11 @@ var app = app || {};
 
 		// Generate the attributes for a new Todo item.
 		newAttributes: function () {
+			console.log(this.$input.val().slice(1).slice(-3));
 			return {
-				title: this.$input.val().trim(),
+				title:  (this.$input.val().slice(1).slice(-3) === "--p") ? this.$input.val().trim().slice(0, -3).trim() : this.$input.val().trim(),
 				order: app.todos.nextOrder(),
+				priority: (this.$input.val().slice(1).slice(-3) === "--p"),
 				completed: false
 			};
 		},
