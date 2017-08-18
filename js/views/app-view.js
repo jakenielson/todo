@@ -96,7 +96,6 @@ var app = app || {};
 
 		// Generate the attributes for a new Todo item.
 		newAttributes: function () {
-			console.log(this.$input.val().slice(1).slice(-3));
 			return {
 				title:  this.$input.val().trim(),
 				order: app.todos.nextOrder(),
@@ -107,7 +106,7 @@ var app = app || {};
 
 		shortcuts: function(m) {
 			// Check for priority shortcut --p
-			if (m.title.slice(1).slice(-3) === "--p"){
+			if (m.title.slice(-3) === "--p"){
 				// Set priority
 				m.priority = true;
 				m.title = m.title.slice(0, -3).trim();
