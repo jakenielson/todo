@@ -104,11 +104,20 @@ var app = app || {};
 			};
 		},
 
+		// Shortcuts are two dashes and a character (i.e. "--p")
 		shortcuts: function(m) {
-			// Check for priority shortcut --p
-			if (m.title.slice(-3) === "--p"){
-				// Set priority
-				m.priority = true;
+			// Check for shortcut command "--""
+			if (m.title.slice(-3, -1) === "--"){
+				switch(m.title.slice(-1)){
+					// Priority
+					case "p":
+						m.priority = true;
+						break;
+					case "c":
+						m.completed = true;
+					default:
+						break;
+				}
 				m.title = m.title.slice(0, -3).trim();
 			}
 			return m;
